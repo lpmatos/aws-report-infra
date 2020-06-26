@@ -1,0 +1,52 @@
+version: "3.8"
+
+# ==============================================================================
+# ANCHORS
+# ==============================================================================
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "500k"
+    max-file: "20"
+
+x-entrypoint: &default-entrypoint
+  entrypoint: >
+    /bin/sh -c "
+      set -e
+      echo Hello
+      /bin/bash || exit 0
+    "
+
+# ==============================================================================
+# SERVICES
+# ==============================================================================
+
+services:
+
+# ==============================================================================
+# REPORT
+# ==============================================================================
+
+  report:
+    container_name: report
+    env_file: [ "./.env" ]
+    build:
+      context: ./${PATH_DOCKERFILE}
+      dockerfile: Dockerfile
+    <<: *default-entrypoint
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    logging: *default-logging
+    networks: [ "report" ]
+    volumes:
+      - ./files:/usr/src/code/files/
+
+
+# ==============================================================================
+# NETWORKS
+# ==============================================================================
+
+networks:
+  report:

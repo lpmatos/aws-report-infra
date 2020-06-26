@@ -1,0 +1,2 @@
+boto3==1.14.10
+XlsxWriter==1.2.8
