@@ -1,10 +1,14 @@
 {
   "name": "aws-report-infra",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": ":new: A simple report on your AWS infrastructure",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "jira": "node jira/index.js akteotonio",
+    "cmt": "git cz",
+    "log": "standard-version",
+    "merge": "standard-version && git request-pull sandbox origin",
+    "cmt-log": "git cz && standard-version"
   },
   "husky": {
     "hooks": {
