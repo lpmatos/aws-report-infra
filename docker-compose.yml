@@ -25,10 +25,10 @@ x-entrypoint: &default-entrypoint
 services:
 
 # ==============================================================================
-# REPORT
+# AWS REPORT
 # ==============================================================================
 
-  report:
+  aws-report:
     container_name: report
     env_file: [ "./.env" ]
     build:
@@ -39,14 +39,12 @@ services:
     stdin_open: true
     tty: true
     logging: *default-logging
-    networks: [ "report" ]
-    volumes:
-      - ./files:/usr/src/code/files/
-
+    networks: [ "aws-report" ]
+    volumes: [ "./files:/usr/src/code/files/" ]
 
 # ==============================================================================
 # NETWORKS
 # ==============================================================================
 
 networks:
-  report:
+  aws-report:

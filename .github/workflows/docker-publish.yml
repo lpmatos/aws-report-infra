@@ -1,7 +1,6 @@
 name: Docker Image CI
 
 on:
-  # Trigger the workflow on push and only in master branch
   push:
     branches:
       - master
@@ -15,11 +14,11 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
-      - name: Build image
+      - name: Build Docker image
         run: docker image build -t ${DOCKER_IMAGE_NAME} .
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-      - name: Push image
+      - name: Push Docker image
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${DOCKER_IMAGE_NAME}
           # Change all uppercase to lowercase
@@ -30,7 +29,5 @@ jobs:
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo ${VERSION} | sed -e 's/^v//')
           # Use Docker `latest` tag convention
           [ "$VERSION" == "master" ] && VERSION=latest
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
           docker image tag ${DOCKER_IMAGE_NAME} ${IMAGE_ID}:${VERSION}
           docker image push ${IMAGE_ID}:${VERSION}

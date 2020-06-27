@@ -4,7 +4,7 @@ import boto3
 import logging
 import xlsxwriter
 from pprint import pprint
-from config import Config
+from settings.config import Config
 from typing import Text, Dict, List
 
 # ==============================================================================
