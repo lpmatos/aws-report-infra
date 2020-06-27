@@ -1,10 +1,10 @@
 {
   "name": "aws-report-infra",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": ":new: A simple report on your AWS infrastructure",
   "main": "index.js",
   "scripts": {
-    "cmt": "git cz",
+    "cz": "git cz",
     "log": "standard-version"
   },
   "husky": {
