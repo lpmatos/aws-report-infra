@@ -4,11 +4,8 @@
   "description": ":new: A simple report on your AWS infrastructure",
   "main": "index.js",
   "scripts": {
-    "jira": "node jira/index.js akteotonio",
     "cmt": "git cz",
-    "log": "standard-version",
-    "merge": "standard-version && git request-pull sandbox origin",
-    "cmt-log": "git cz && standard-version"
+    "log": "standard-version"
   },
   "husky": {
     "hooks": {
